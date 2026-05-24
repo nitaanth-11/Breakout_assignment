@@ -1,0 +1,301 @@
+{
+  "business": {
+    "name": "Breakout Escape Rooms",
+    "tagline": "India's Premier Escape Room Experience",
+    "description": "Breakout Escape Rooms offers immersive, themed escape room adventures for friends, families, corporate teams, and party groups. With locations in Mumbai and Bangalore, we provide world-class puzzles, professional game masters, and unforgettable experiences."
+  },
+
+  "locations": {
+    "mumbai": {
+      "city": "Mumbai",
+      "address": "Breakout Escape Rooms, 3rd Floor, Phoenix Marketcity, LBS Marg, Kurla West, Mumbai, Maharashtra 400070",
+      "landmark": "Inside Phoenix Marketcity Mall, 3rd Floor",
+      "contact": {
+        "phone": "+91-9876543210",
+        "whatsapp": "+91-9876543210",
+        "email": "support@breakoutmumbai.com"
+      },
+      "operating_hours": {
+        "days": "Monday to Sunday (All 7 days)",
+        "opening_time": "11:00 AM",
+        "closing_time": "11:00 PM",
+        "last_slot": "9:30 PM",
+        "holidays": "Open on all public holidays. Closed only on Holi and Diwali."
+      },
+      "parking": {
+        "availability": "Mall parking available at Phoenix Marketcity.",
+        "type": "Paid parking (mall rates apply).",
+        "valet": "Valet parking available at the mall entrance."
+      },
+      "escape_rooms": [
+        {
+          "name": "Prison Break",
+          "theme": "You are wrongfully imprisoned in a high-security jail. Find clues, solve puzzles, and escape before the warden returns in 60 minutes.",
+          "difficulty": "Medium",
+          "difficulty_rating": "3/5",
+          "duration_minutes": 60,
+          "team_size": { "minimum": 2, "maximum": 6, "recommended": 4 },
+          "age_recommendation": "12+ (under 14 must be accompanied by an adult)",
+          "highlights": ["Realistic prison cell setup", "Multiple puzzle layers", "Hidden compartments and secret locks", "Professional sound effects and lighting"],
+          "success_rate": "35%",
+          "best_for": ["First-timers", "Friends", "Small groups", "Date nights"],
+          "accessibility": "Wheelchair accessible",
+          "language": "English and Hindi clues available"
+        },
+        {
+          "name": "Haunted Mansion",
+          "theme": "You enter an abandoned mansion rumored to be haunted. Unravel the mystery of the ghost before time runs out. Not for the faint-hearted!",
+          "difficulty": "Hard",
+          "difficulty_rating": "4.5/5",
+          "duration_minutes": 75,
+          "team_size": { "minimum": 4, "maximum": 8, "recommended": 6 },
+          "age_recommendation": "16+ (contains horror elements, jump scares, and dark environments)",
+          "highlights": ["Live actor interactions", "Horror-themed puzzles with jump scares", "Advanced electronic locks and sensors", "Fog machines and theatrical lighting", "Immersive sound design"],
+          "success_rate": "18%",
+          "best_for": ["Experienced players", "Thrill seekers", "Large friend groups", "Corporate team challenges"],
+          "accessibility": "Not wheelchair accessible due to narrow corridors",
+          "language": "English and Hindi clues available",
+          "warning": "Contains horror elements including jump scares, darkness, fog, and live actors. Not recommended for individuals with heart conditions, epilepsy, or severe anxiety."
+        }
+      ],
+      "pricing": {
+        "currency": "INR",
+        "weekday": { "price_per_person": 899, "applicable_days": ["Monday", "Tuesday", "Wednesday", "Thursday"] },
+        "weekend": { "price_per_person": 1099, "applicable_days": ["Friday", "Saturday", "Sunday"] },
+        "notes": ["GST (18%) is included in the listed price.", "Public holidays are charged at weekend rates."]
+      }
+    },
+
+    "bangalore": {
+      "city": "Bangalore",
+      "address": "Breakout Escape Rooms, 2nd Floor, Orion Mall, Dr. Rajkumar Road, Rajajinagar, Bangalore, Karnataka 560010",
+      "landmark": "Inside Orion Mall, 2nd Floor near PVR Cinemas",
+      "contact": {
+        "phone": "+91-9123456780",
+        "whatsapp": "+91-9123456780",
+        "email": "support@breakoutbangalore.com"
+      },
+      "operating_hours": {
+        "days": "Monday to Sunday (All 7 days)",
+        "opening_time": "10:30 AM",
+        "closing_time": "10:30 PM",
+        "last_slot": "9:00 PM",
+        "holidays": "Open on all public holidays. Closed only on Ugadi and Diwali."
+      },
+      "parking": {
+        "availability": "Mall parking available at Orion Mall.",
+        "type": "Paid parking (mall rates apply).",
+        "valet": "Valet parking available at the main entrance."
+      },
+      "escape_rooms": [
+        {
+          "name": "The Heist",
+          "theme": "You are a team of elite thieves breaking into a high-security museum vault. Crack the codes, bypass the lasers, and steal the diamond before the alarm goes off!",
+          "difficulty": "Medium",
+          "difficulty_rating": "3.5/5",
+          "duration_minutes": 60,
+          "team_size": { "minimum": 2, "maximum": 6, "recommended": 4 },
+          "age_recommendation": "12+ (under 14 must be accompanied by an adult)",
+          "highlights": ["Laser maze simulation", "Real vault-style locks", "Motion sensor puzzles", "Cinematic soundtrack"],
+          "success_rate": "30%",
+          "best_for": ["First-timers", "Friends", "Couples", "Small corporate teams"],
+          "accessibility": "Wheelchair accessible",
+          "language": "English and Kannada clues available"
+        },
+        {
+          "name": "Zombie Apocalypse",
+          "theme": "A zombie virus has broken out in the city. You are trapped in a research lab with the antidote hidden somewhere. Find it and escape before the zombies break through!",
+          "difficulty": "Hard",
+          "difficulty_rating": "4/5",
+          "duration_minutes": 70,
+          "team_size": { "minimum": 3, "maximum": 8, "recommended": 5 },
+          "age_recommendation": "14+ (contains intense themes and dark environments)",
+          "highlights": ["Zombie animatronics", "Lab-themed puzzle sequences", "Timed pressure mechanics", "Blacklight and UV puzzles"],
+          "success_rate": "22%",
+          "best_for": ["Experienced players", "Thrill seekers", "Large groups", "Corporate team building"],
+          "accessibility": "Wheelchair accessible with assistance",
+          "language": "English and Kannada clues available"
+        },
+        {
+          "name": "Prison Break",
+          "theme": "You are wrongfully imprisoned in a high-security jail. Find clues, solve puzzles, and escape before the warden returns in 60 minutes.",
+          "difficulty": "Medium",
+          "difficulty_rating": "3/5",
+          "duration_minutes": 60,
+          "team_size": { "minimum": 2, "maximum": 6, "recommended": 4 },
+          "age_recommendation": "12+ (under 14 must be accompanied by an adult)",
+          "highlights": ["Realistic prison cell setup", "Multiple puzzle layers", "Hidden compartments and secret locks"],
+          "success_rate": "35%",
+          "best_for": ["First-timers", "Friends", "Small groups"],
+          "accessibility": "Wheelchair accessible",
+          "language": "English and Kannada clues available"
+        }
+      ],
+      "pricing": {
+        "currency": "INR",
+        "weekday": { "price_per_person": 799, "applicable_days": ["Monday", "Tuesday", "Wednesday", "Thursday"] },
+        "weekend": { "price_per_person": 999, "applicable_days": ["Friday", "Saturday", "Sunday"] },
+        "notes": ["GST (18%) is included in the listed price.", "Public holidays are charged at weekend rates."]
+      }
+    }
+  },
+
+  "common_policies": {
+    "booking": {
+      "methods": ["Website (breakout.in/book)", "WhatsApp", "Phone call during operating hours"],
+      "advance_payment": "50% advance payment required to confirm booking. Remaining 50% payable at the venue.",
+      "payment_methods": ["UPI", "Credit Card", "Debit Card", "Net Banking", "Cash (at venue for remaining balance)"],
+      "confirmation": "Booking confirmation with ID, date, time, room, and receipt sent via WhatsApp and email within 15 minutes.",
+      "arrival": "Please arrive 15 minutes before your slot for briefing and safety instructions.",
+      "rescheduling": {
+        "free_window": "Free rescheduling up to 24 hours before the booking.",
+        "late_reschedule": "Within 24 hours: subject to availability, may incur ₹200 fee.",
+        "max_reschedules": 2
+      }
+    },
+    "cancellation_policy": {
+      "free_cancellation": "Up to 24 hours before booking — full refund within 5-7 business days.",
+      "late_cancellation": "Less than 24 hours — no refund, but can reschedule once.",
+      "no_show": "No refund for no-shows.",
+      "refund_method": "Refunds processed to original payment method within 5-7 business days.",
+      "refund_disputes": "Must be escalated to a human support agent."
+    },
+    "age_policy": {
+      "minimum_age": "No strict minimum, but recommended 10+.",
+      "under_14": "Players under 14 must be accompanied by a participating adult (18+).",
+      "horror_rooms": "Horror-themed rooms (Haunted Mansion, Zombie Apocalypse) recommended for 16+/14+ respectively.",
+      "id_requirement": "Age verification may be requested. Please carry valid ID."
+    },
+    "food_and_beverage": {
+      "outside_food": "NOT allowed inside game rooms.",
+      "water": "Water bottles allowed but must be kept in designated area outside game room.",
+      "dining": "Mall food courts available at both locations."
+    },
+    "safety": {
+      "rules": [
+        "All rooms have CCTV monitoring.",
+        "Emergency exit buttons in every room.",
+        "Live game master monitors every session.",
+        "No physical force required — do not break or damage props.",
+        "Players under influence of alcohol/drugs will not be permitted.",
+        "Press emergency button or call out if you feel unwell."
+      ],
+      "health_advisory": "Players with heart conditions, epilepsy, claustrophobia, or severe anxiety should consult staff before booking horror-themed rooms.",
+      "injury_protocol": "Staff trained in basic first aid. Serious incidents escalated immediately. All injuries must be reported to human support."
+    },
+    "personal_belongings": {
+      "policy": "All belongings (phones, bags, wallets) must be stored in free lockers before entering.",
+      "liability": "Breakout is not responsible for loss or damage of personal belongings."
+    },
+    "dress_code": "Comfortable clothing and closed-toe shoes recommended. No high heels or open-toe sandals.",
+    "photography": {
+      "during_game": "NOT allowed during the game.",
+      "after_game": "Group photos with Breakout props encouraged in the designated photo area."
+    }
+  },
+
+  "discounts_and_offers": {
+    "note": "All discounts apply equally to both Mumbai and Bangalore locations unless stated otherwise.",
+    "general_rules": [
+      "Only ONE discount or offer can be applied per booking.",
+      "Discounts cannot be combined or stacked.",
+      "Discounts applied on base price before taxes.",
+      "Management reserves the right to modify or withdraw offers without notice.",
+      "Custom discount negotiations must be escalated to a human agent."
+    ],
+    "group_discounts": {
+      "description": "Discounts for larger groups booking together.",
+      "tiers": [
+        { "group_size": "6-8 players", "discount_percentage": 10 },
+        { "group_size": "9-12 players", "discount_percentage": 15, "note": "Multiple rooms booked simultaneously." },
+        { "group_size": "13-20 players", "discount_percentage": 20, "note": "Multiple rooms booked simultaneously." }
+      ],
+      "conditions": ["All players must book under a single booking.", "Full advance payment required."]
+    },
+    "birthday_party_package": {
+      "discount_percentage": 15,
+      "includes": [
+        "15% discount on total booking",
+        "Complimentary birthday decoration in briefing area",
+        "Birthday shout-out from game master",
+        "Group photo with Breakout props",
+        "Complimentary birthday badge"
+      ],
+      "conditions": [
+        "Book at least 48 hours in advance.",
+        "Minimum 4 players.",
+        "Birthday person plays FREE if 6+ paying players.",
+        "Government ID or proof of birthday may be required."
+      ],
+      "how_to_book": "Call or WhatsApp the respective location and mention 'Birthday Package'."
+    },
+    "corporate_packages": {
+      "description": "Team-building and corporate event packages.",
+      "tiers": [
+        { "group_size": "10-20 people", "discount_percentage": 15, "includes": ["Dedicated game master", "Team scorecards", "Group photos"] },
+        { "group_size": "21-40 people", "discount_percentage": 20, "includes": ["Dedicated game master", "Scorecards", "Photos", "Custom challenges", "Certificates"] },
+        { "group_size": "40+ people", "discount_percentage": 25, "includes": ["Everything above", "Exclusive venue access 2 hrs", "Custom branding", "Post-event analytics"] }
+      ],
+      "conditions": ["Book at least 5 business days in advance.", "Corporate bookings above 20 people require escalation to events team.", "Full advance payment required.", "GST invoicing available."],
+      "how_to_book": "Email corporate@breakout.in or WhatsApp the location."
+    },
+    "student_discount": {
+      "discount_percentage": 10,
+      "conditions": ["Valid student ID at venue.", "Weekdays only (Mon-Thu).", "School, college, university students."]
+    },
+    "early_bird_offer": {
+      "discount_percentage": 10,
+      "conditions": ["First slot of the day only.", "Weekdays only.", "Book 24 hours in advance."]
+    },
+    "repeat_player_discount": {
+      "discount_percentage": 10,
+      "conditions": ["Previous booking reference or registered phone number required.", "Valid from second visit onwards.", "Both weekdays and weekends."]
+    },
+    "festive_offers": {
+      "description": "Seasonal promotions during festivals.",
+      "how_to_check": "Follow @breakoutescaperooms on Instagram or visit breakout.in for current offers."
+    }
+  },
+
+  "escalation": {
+    "conditions": [
+      "Customer requests a refund",
+      "Customer reports injury or safety issue",
+      "Customer reports technical/equipment issue",
+      "Corporate booking above 20 people",
+      "Custom discount negotiation",
+      "Customer expresses frustration, anger, or dissatisfaction",
+      "Customer explicitly asks for a human agent",
+      "Question is outside SOP scope",
+      "Confidence in answer is low",
+      "Complaint about staff behavior",
+      "Special accessibility requests not in SOP"
+    ],
+    "message": "I understand your concern. Let me connect you with a human support agent who can assist you further. Our team will get back to you within 30 minutes during operating hours.",
+    "contacts": {
+      "mumbai_support": "+91-9876543210",
+      "bangalore_support": "+91-9123456780",
+      "corporate_events": "corporate@breakout.in",
+      "complaints": "feedback@breakout.in"
+    }
+  },
+
+  "lead_qualification": {
+    "purpose": "Collect customer details to personalize experience and assist sales.",
+    "questions": [
+      { "question": "Which location are you interested in — Mumbai or Bangalore?", "field": "preferred_location" },
+      { "question": "Is this booking for friends, family, a birthday party, or a corporate event?", "field": "booking_purpose" },
+      { "question": "How many players are you expecting?", "field": "group_size" },
+      { "question": "Which difficulty level interests you — Medium or Hard?", "field": "difficulty_preference" },
+      { "question": "What date and time are you planning to visit?", "field": "preferred_date" },
+      { "question": "Have you played escape rooms before?", "field": "experience_level" }
+    ]
+  },
+
+  "agent": {
+    "name": "Closira",
+    "persona": "Closira is the friendly and knowledgeable AI customer support assistant for Breakout Escape Rooms. Warm, professional, concise, and always prioritizes accuracy over assumptions.",
+    "greeting": "Hey there! 👋 I'm Closira, your virtual assistant at Breakout Escape Rooms. We have locations in Mumbai and Bangalore! How can I help you today?",
+    "farewell": "Thanks for chatting with me! If you need anything else, feel free to reach out anytime. Have a great day! 🎉"
+  }
+}
