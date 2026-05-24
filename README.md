@@ -1,178 +1,176 @@
-# Closira — AI Support Agent for Breakout Escape Rooms
+# Closira Backend — AI Customer Support API & Engine
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
-![Gemini](https://img.shields.io/badge/Google%20Gemini-2.5%20Flash-orange)
-![Flask](https://img.shields.io/badge/Flask-Web%20API-green)
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge)
+![Google Gemini](https://img.shields.io/badge/Google%20Gemini-2.5%20Flash-orange?style=for-the-badge&logo=google)
+![Flask](https://img.shields.io/badge/Flask-Web%20API-green?style=for-the-badge&logo=flask)
+![SQLite](https://img.shields.io/badge/SQLite-Data%20Logging-blue?style=for-the-badge&logo=sqlite)
 
-An intelligent, autonomous customer support agent powered by **Google Gemini 2.5 Flash**, specifically built to handle customer inquiries for **Breakout Escape Rooms** across their Mumbai and Bangalore locations. 
-
-Unlike standard conversational bots, Closira uses a rigid JSON Standard Operating Procedure (SOP) file as its single source of truth, guaranteeing accurate, hallucination-free answers to customers.
+The backend engine of **Closira**, an intelligent, autonomous customer support agent built to answer customer inquiries for **Breakout Escape Rooms** (Mumbai and Bangalore locations) grounded strictly in corporate Standard Operating Procedures (SOP). Powered by **Google Gemini 2.5 Flash** and **Flask**.
 
 ---
 
 ## 📑 Table of Contents
-- [Overview & Architecture](#overview--architecture)
-- [Core Features](#core-features)
-- [Technology Stack](#technology-stack)
-- [Prerequisites](#prerequisites)
-- [Installation & Setup](#installation--setup)
-- [Usage Guide](#usage-guide)
-- [Database & Analytics](#database--analytics)
-- [Project Structure](#project-structure)
-- [Troubleshooting](#troubleshooting)
+- [🧠 Backend Architecture](#-backend-architecture)
+- [📋 System Requirements & Setup](#-system-requirements--setup)
+- [🧠 Zero-Hallucination & SOP Grounding](#-zero-hallucination--sop-grounding)
+- [🚨 10-Point Escalation Matrix & NLP Sentiment](#-10-point-escalation-matrix--nlp-sentiment)
+- [📡 Web API Endpoints](#-web-api-endpoints)
+- [🗄️ Database Schema & Logging](#%ufe0f-database-schema--logging)
+- [💬 CLI Mode](#-cli-mode)
+- [🛠️ Troubleshooting (Windows Console Fixes)](#%ufe0f-troubleshooting-windows-console-fixes)
 
 ---
 
-## 🧠 Overview & Architecture
+## 🧠 Backend Architecture
 
-Closira operates through a dynamic Python backend that feeds contextual awareness into the Google Gemini LLM. 
+The backend operates as a decoupled RESTful Web API and CLI agent. It intercepts incoming HTTP POST requests, injects system prompts, live system dates, and the raw company SOP database (`sop_data.json`) directly into the Gemini model, and generates structured, valid JSON replies.
 
-Whenever a user sends a message, the system invisibly injects:
-1. The **Full SOP Data** (Pricing, Rooms, Policies, Discounts)
-2. **Strict Escalation Rules** (When to hand off to a human)
-3. **Live System Timestamp** (To resolve relative time phrases like "tomorrow")
-
-The AI is forced to output a strictly structured JSON response containing the actual message, an internal confidence score, and boolean flags indicating if a human escalation is required.
-
----
-
-## ✨ Core Features
-
-1. **Zero-Hallucination SOP Grounding**
-   The agent is strictly instructed to *never* invent pricing, rooms, or policies. If the requested information does not exist in `sop_data.json`, it is explicitly programmed to decline gracefully and escalate the query.
-
-2. **Intelligent Location Disambiguation**
-   Breakout has branches in Mumbai and Bangalore with differing prices and rooms. If a user asks "What is the price?", the AI automatically intercepts and requests city clarification before dispensing information.
-
-3. **10-Point Strict Escalation Matrix & NLP Sentiment Analysis**
-   The bot uses built-in NLP capabilities to analyze the sentiment of every customer message. It auto-escalates to a human agent (`+91-9876543210`) if it detects:
-   - Frustration / Negative Sentiment (Using NLP)
-   - Profanity / Cuss words
-   - Refund requests
-   - Safety / Injury reports
-   - Corporate bookings (>20 people)
-   - Technical failures
-   - Discount negotiations
-
-4. **Dynamic Time & Date Context**
-   The user can say "Can I book a room for tomorrow?". Closira automatically reads your system's live timestamp dynamically injected into the backend, allowing it to correctly identify the date and apply weekend/weekday pricing rules perfectly.
-
-5. **SQL Database Logging & Auto-Summarization**
-   Every single message exchanged is logged seamlessly into a native SQLite database table (`conversations.db`). This allows Administrators to easily view SQL tables of conversations, timestamps, and AI-generated chat summaries.
-
-6. **Free-Tier Rate Limit Resilience**
-   Google Gemini's free tier heavily throttles requests. Closira includes built-in exception handling that detects `429 Rate Limit` errors, pauses operation for 10 seconds, and retries the summary generation safely without crashing the system.
-
-7. **Multi-Question Handling (Bullet Points)**
-   If a user fires off 3 questions in a single message, the AI systematically catches all of them and organizes the answers cleanly into a bulleted list.
-
-8. **Unified Booking Options**
-   Users are specifically prompted with all valid booking channels: via WhatsApp, the internal App, or direct Phone Number.
-
----
-
-## 🛠 Technology Stack
-
-- **Core Language:** Python 3.10+
-- **LLM Engine:** Google Generative AI SDK (`gemini-2.5-flash`)
-- **Web Framework:** Flask & Flask-CORS (for optional web frontend hooks)
-- **Database:** SQLite3 (Native Python)
-- **Environment Management:** `python-dotenv`
-
----
-
-## 📋 Prerequisites
-
-Before running this project, ensure you have the following installed on your system:
-- Python 3.9 or higher
-- `pip` (Python package manager)
-- A valid **Google Gemini API Key** (Can be obtained for free from [Google AI Studio](https://aistudio.google.com/app/apikey))
-
----
-
-## 🚀 Installation & Setup
-
-1. **Clone or Download the Repository**
-   Navigate to the project folder in your terminal.
-
-2. **Install Required Dependencies**
-   Run the following command to install Flask, Google AI SDK, and Dotenv:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Configure the Environment Variables**
-   Create a file named `.env` in the root folder of the project.
-   Add your Gemini API key to the file exactly like this:
-   ```env
-   GEMINI_API_KEY="AIzaSyYourActualKeyGoesHere"
-   ```
-
----
-
-## 💬 Usage Guide
-
-### Starting the AI Chat (Interactive Mode)
-To chat with the agent in a simulated real-time terminal interface:
-```bash
-python app.py --cli
+```mermaid
+graph LR
+    Client(React Native / HTTP) <--> |POST /chat| Server[Flask API Server]
+    Server <--> |Generative SDK| Gemini[Gemini 2.5 Flash]
+    Server <--> |Read Only| SOP[(sop_data.json)]
+    Server <--> |Write Only| SQL[(SQLite DB)]
 ```
-- Type your questions normally at the `You:` prompt.
-- The AI will simulate typing character-by-character.
-- Type `reset` to clear the current chat memory and start a new session.
-- Type `quit` to end the session. **Note:** Only typing `quit` gracefully closes the session and triggers the AI to save a summary of your chat to the database!
 
-### Starting the Flask Server (API Mode)
-If you wish to hook this agent up to a React frontend or WhatsApp Bot:
+---
+
+## 📋 System Requirements & Setup
+
+### Prerequisites
+*   Python 3.10 or higher
+*   A valid **Google Gemini API Key** (obtainable from [Google AI Studio](https://aistudio.google.com/app/apikey))
+
+### 1. Installation
+Navigate to the root project folder in your terminal and install dependencies:
+```bash
+cd c:/Users/nitaa/Downloads/Breakout_Assignment
+pip install -r requirements.txt
+```
+
+### 2. Configure Environment variables
+Create a `.env` file in the root folder:
+```env
+GEMINI_API_KEY="AIzaSyYourActualGoogleGeminiApiKey"
+```
+
+### 3. Run the Web Server
+Launch the Flask development server on port 5000:
 ```bash
 python app.py
 ```
-This will spin up a local server at `http://127.0.0.1:5000` with multiple endpoints (`POST /chat`, `GET /rooms/mumbai`, etc.)
+*Output will display:* `[*] Closira is starting on http://127.0.0.1:5000`
 
 ---
 
-## 📊 Database & Analytics
+## 🧠 Zero-Hallucination & SOP Grounding
 
-All conversations and session summaries are stored securely in `conversations.db`. Since `.db` files are binary and cannot be easily read in a text editor, a dedicated viewing script is provided.
+Closira is heavily grounded in the company's Standard Operating Procedure (`sop_data.json`).
+*   **Rules of Engagement:** The model is prohibited from guessing, estimating, or inventing any escape rooms, pricing tiers, game timings, or discount policies.
+*   **Missing SOP Info:** If a customer inquires about a topic outside the SOP (e.g., VR games, external catering, custom designs), the AI must respond exactly with: `"I am unable to help with that."` and immediately mark the ticket as `needs_escalation: true`.
+*   **Location Disambiguation:** Since Breakout operates in both Mumbai and Bangalore with different price scales, if a customer asks a general question without specifying the city, the backend catches the ambiguity and clarifying prompt: `"Sure! We have locations in both Mumbai and Bangalore. Which city are you asking about?"`
 
-To read your past conversations and their AI-generated summaries, open a new terminal window and run:
+---
+
+## 🚨 10-Point Escalation Matrix & NLP Sentiment
+
+Closira utilizes natural language processing (NLP) to analyze customer messages. The engine automatically sets `"needs_escalation": true` and lists the reason if any of these 10 scenarios occur:
+1.  **Unsupported/Out-of-SOP Question:** Asking questions not documented in `sop_data.json`.
+2.  **Frustration/Anger:** Detecting negative sentiment or intense complaints.
+3.  **Refund Requests:** Asking for booking cancellations or refunds.
+4.  **Injury/Safety Complaints:** Reporting accidents inside the escape rooms.
+5.  **Technical Failure:** Broken locks, sensors, or clues during a game.
+6.  **Discount Negotiation:** Requesting custom coupons or bargaining for discounts.
+7.  **Large Corporate Bookings:** Asking to book for groups above 20 players.
+8.  **Explicit Human Request:** Typing "I want to speak with a real person."
+9.  **Repeated AI Failure:** Expressing confusion with the AI's answers ("That's not what I asked").
+10. **Legal/Liability Questions:** Inquiring about accident waivers or lockers liability.
+
+---
+
+## 📡 Web API Endpoints
+
+### 1. Chat Completion API
+*   **Endpoint:** `POST /chat`
+*   **Request Headers:** `Content-Type: application/json`
+*   **Request Body Schema:**
+    ```json
+    {
+      "message": "Is Haunted Mansion available in Mumbai?",
+      "conversation_id": "session_rahul_99"
+    }
+    ```
+*   **Success Response Schema (200 OK):**
+    ```json
+    {
+      "answer": "Yes! Haunted Mansion is available at our Mumbai location in Phoenix Marketcity...",
+      "confidence": 1.0,
+      "needs_escalation": false,
+      "escalation_reason": null,
+      "lead_qualification_questions": [
+        "What date are you planning to visit?",
+        "How many players are in your group?"
+      ]
+    }
+    ```
+
+### 2. Retrieve SOP Database
+*   **Endpoint:** `GET /sop`
+*   **Response:** Raw contents of `sop_data.json`.
+
+### 3. Retrieve Location Rooms
+*   **Endpoint:** `GET /rooms/<location>` (e.g. `/rooms/mumbai`)
+*   **Response:** JSON list of active escape rooms, difficulty tiers, and headcounts.
+
+### 4. Clear Conversation History
+*   **Endpoint:** `DELETE /chat/<conversation_id>`
+*   **Response:** `{"status": "cleared", "conversation_id": "..."}`
+
+---
+
+## 🗄️ Database Schema & Logging
+
+Every conversation is logged in the local SQLite database `conversations.db` across two tables:
+
+### 1. `messages` Table
+Tracks every single query and reply.
+*   `session_id` (TEXT)
+*   `timestamp` (TEXT)
+*   `role` (TEXT: `'user'` or `'assistant'`)
+*   `content` (TEXT)
+
+### 2. `summaries` Table
+Saves chat summaries generated when sessions close.
+*   `session_id` (TEXT)
+*   `timestamp` (TEXT)
+*   `summary` (TEXT)
+
+*To review conversation tables inside your terminal, run:*
 ```bash
 python view_db.py
 ```
-This will print a beautifully formatted log of all messages and chat summaries directly to your console.
 
 ---
 
-## 📁 Project Structure
+## 💬 CLI Mode
 
-```text
-Breakout_Assignment/
-│
-├── app.py               # Main application logic, AI routing, and CLI interface
-├── view_db.py           # Helper script to read and print SQLite database contents
-├── test_cases.md        # Detailed breakdown of testing rules and future enhancements
-├── sop_data.json        # The central brain/knowledge base of the company
-├── requirements.txt     # Python dependencies
-├── .env                 # Secret environment variables (API Key)
-├── .gitignore           # Git ignore file for security
-└── conversations.db     # Auto-generated SQLite database containing logs
+For local diagnostics, run the interactive command line console:
+```bash
+python app.py --cli
 ```
+*   **`reset`**: Clear the local session memory and restart.
+*   **`quit`**: Terminate the session and trigger the AI to save the chat summary in the SQLite database.
 
 ---
 
-## ⚠️ Troubleshooting & Known Limitations
+## 🛠️ Troubleshooting (Windows Console Fixes)
 
-### Troubleshooting
-**1. "I'm experiencing a configuration issue..."**
-This means your Gemini API key is missing or invalid. Double-check your `.env` file and ensure there are no spaces around the `=` sign.
+### 1. malformed Database Disk Image
+*   **Symptom:** `sqlite3.DatabaseError: database disk image is malformed`
+*   **Reason:** The binary `conversations.db` was corrupted.
+*   **Resolution:** Delete `conversations.db` from your project root. The Flask app will automatically initialize a fresh, healthy database file on start.
 
-**2. "Rate Limit hit. Waiting 10s before summarizing..."**
-If you chat too fast and then type `quit`, the free-tier API gets overwhelmed. The script will automatically pause for 10 seconds and retry saving your summary. Just wait patiently!
-
-**3. The Database viewer (`view_db.py`) says "No summaries found."**
-Summaries are ONLY generated when you gracefully exit a chat by typing the word `quit`. If you close the terminal window forcefully (or hit `Ctrl+C`), the AI does not get a chance to save the summary.
-
-### Trade-offs & Known Limitations
-- **CLI Dependency:** The current iteration relies entirely on the command-line interface. For a production deployment, this backend would need to be coupled with a Web Socket (e.g. Socket.io) or WhatsApp Business API to be usable by real customers.
-- **In-Memory State Loss:** The chat context (history) is managed via an in-memory python dictionary (`conversations = {}`). While messages are saved permanently to SQL for analytics, if the server restarts, ongoing active chat sessions will lose their context. For a robust production environment, session state should be mapped to Redis or the SQLite database.
-- **LLM Rate Limits:** Because the system currently relies on the Google Gemini Free Tier, high concurrency would cause API failures. Scaling this requires upgrading to a paid tier.
+### 2. UnicodeEncodeError on Windows Server Launch
+*   **Symptom:** `UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f680'`
+*   **Reason:** Windows console environments run `cp1252` encoding by default and cannot render unicode emojis.
+*   **Resolution:** The startup print statement has been replaced with ASCII `[*]`. The server runs perfectly.
